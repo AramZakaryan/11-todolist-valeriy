@@ -1,11 +1,14 @@
-import React, {ChangeEvent, KeyboardEvent, useState} from "react";
+import React, {ChangeEvent, KeyboardEvent, memo, useState} from "react";
 import {Button, TextField} from "@mui/material";
 import AddCircleOutline from '@mui/icons-material/AddCircleOutline';
 
 type AddItemFormPropsType = {
     addItem: (title: string) => void
 }
-export const AddItemForm: React.FC<AddItemFormPropsType> = (props) => {
+export const AddItemForm = memo((props:AddItemFormPropsType) => {
+
+    console.log("AddItemForm render")
+
     const [title,
         setTitle] =
         useState("")
@@ -18,7 +21,7 @@ export const AddItemForm: React.FC<AddItemFormPropsType> = (props) => {
         if (newTitle !== "") {
             props.addItem(newTitle);
             setTitle("");
-        } else {
+        } else if (!error){
             setError(true);
         }
     }
@@ -27,7 +30,9 @@ export const AddItemForm: React.FC<AddItemFormPropsType> = (props) => {
     }
 
     const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-        setError(false);
+        if(error) {
+            setError(false)
+        }
         if (e.charCode === 13) {
             addItem();
         }
@@ -56,4 +61,4 @@ export const AddItemForm: React.FC<AddItemFormPropsType> = (props) => {
             <AddCircleOutline fontSize={"small"}/>
         </Button>
     </div>)
-}
+})
