@@ -1,6 +1,6 @@
 import './App.css';
 import React, {Reducer, useState, useReducer, useCallback} from 'react';
-import {ChildrenComponent, ParentComponent, TaskType, TodolistWithRedux} from './TodolistWithRedux';
+import {TaskType, TodolistWithRedux} from './TodolistWithRedux';
 import {v1} from 'uuid';
 import {AddItemForm} from "./AddItemForm";
 import {
